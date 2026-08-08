@@ -95,3 +95,7 @@ Preview the production build locally:
 ```bash
 pnpm preview
 ```
+
+## License
+
+This project is open source under the [MIT License](LICENSE).
