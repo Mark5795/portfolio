@@ -6,7 +6,7 @@
         <h1 id="about-title" class="sr-only">{{ t('overMe') }}</h1>
         <article class="intro-card">
           <p>{{ t('aboutDescription') }}</p>
-          <div class="tag-list" :aria-label="t('specializations')">
+          <div class="tag-list">
             <span>Linux/Unix</span>
             <span>Kubernetes</span>
             <span>CI/CD Pipeline</span>

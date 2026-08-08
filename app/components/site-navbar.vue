@@ -26,7 +26,7 @@
           </button>
         </div>
 
-        <div v-if="settingsOpen" id="theme-settings" class="theme-settings" role="dialog" :aria-label="t('openSettings')">
+        <div v-show="settingsOpen" id="theme-settings" class="theme-settings" role="dialog" :aria-label="t('openSettings')">
           <p class="settings-title">{{ t('displayTheme') }}</p>
           <label class="theme-option">
             <input v-model="theme" type="radio" value="dark">
@@ -60,7 +60,7 @@
       </div>
     </nav>
 
-    <div v-if="menuOpen" id="mobile-navigation" class="mobile-navigation">
+    <div v-show="menuOpen" id="mobile-navigation" class="mobile-navigation">
       <NuxtLink class="nav-link" active-class="nav-link-active" to="/" @click="menuOpen = false">{{ t('home') }}</NuxtLink>
       <NuxtLink class="nav-link" active-class="nav-link-active" to="/projects" @click="menuOpen = false">{{ t('projects') }}</NuxtLink>
       <NuxtLink class="nav-link" active-class="nav-link-active" to="/about" @click="menuOpen = false">{{ t('about') }}</NuxtLink>

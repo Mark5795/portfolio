@@ -24,7 +24,7 @@
               <h3 v-if="block.type === 'heading'">{{ block.content }}</h3>
               <p v-else-if="block.type === 'paragraph'">{{ block.content }}</p>
               <ul v-else-if="block.type === 'list'">
-                <li v-for="item in block.items" :key="item">{{ item }}</li>
+                <li v-for="item in block.items || []" :key="item">{{ item }}</li>
               </ul>
               <pre v-else><code>{{ block.content }}</code></pre>
             </template>
@@ -73,7 +73,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
+import { isArchivedProjectPath, parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -86,7 +86,7 @@ const projectFiles = import.meta.glob('../../../content/projects/**/*.md', {
 
 const slug = String(route.params.slug)
 const filePath = computed(() => {
-  const paths = Object.keys(projectFiles)
+  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path))
   return paths.find((path) => projectSlugFromPath(path) === slug && projectMatchesLocale(path, locale.value))
     ?? paths.find((path) => projectSlugFromPath(path) === slug && !projectMatchesLocale(path, locale.value))
 })
@@ -97,7 +97,7 @@ if (!filePath.value) {
 
 const project = computed(() => parseProjectMarkdown(filePath.value ? projectFiles[filePath.value] : ''))
 
-function formatPublishedDate(date) {
+function formatPublishedDate(date: string) {
   return date ? dateFormatter.format(new Date(`${date}T00:00:00`)) : ''
 }
 </script>

@@ -6,7 +6,7 @@
       <nav class="footer-links" :aria-label="t('projects')">
         <a href="https://www.linkedin.com/in/markkea/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://github.com/Mark5795" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="/source">{{ t('sourceCode') }}</a>
+        <a href="https://github.com/Mark5795/portfolio" target="_blank" rel="noreferrer">{{ t('sourceCode') }}</a>
         <a href="/privacy">{{ t('privacy') }}</a>
       </nav>
     </div>

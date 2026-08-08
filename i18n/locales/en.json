@@ -33,5 +33,15 @@
   "externalLinks": "EXTERNAL_LINKS",
   "sourceCode": "Source Code",
   "privacy": "Privacy",
+  "privacyTitle": "Privacy Policy",
+  "privacyIntro": "This page explains how this portfolio handles information when you visit it.",
+  "privacyDataTitle": "Data collection",
+  "privacyDataText": "This portfolio does not intentionally collect personal information through forms, accounts, or tracking profiles. Server logs may contain basic technical information needed to deliver and secure the website.",
+  "privacyCookiesTitle": "Cookies and storage",
+  "privacyCookiesText": "The site does not use advertising cookies or analytics trackers. Your language and display preferences may be stored locally in your browser so the interface can remember your choices.",
+  "privacyExternalTitle": "External services",
+  "privacyExternalText": "Links to services such as GitHub and LinkedIn take you to third-party websites. Their own privacy policies apply when you leave this portfolio.",
+  "privacyContactTitle": "Contact",
+  "privacyContactText": "For questions about this privacy policy or the information handled by this website, contact me through LinkedIn or GitHub.",
   "allRightsReserved": "ALL RIGHTS RESERVED."
 }

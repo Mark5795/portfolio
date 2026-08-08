@@ -1,75 +1,97 @@
-# Nuxt Minimal Starter
+# MARK KEA // Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A dark, technical IT portfolio built with Nuxt. Project pages are driven by localized Markdown files and presented with a terminal-inspired interface.
+
+## Features
+
+- Responsive home, about, projects, and privacy pages
+- English and Dutch localization
+- Markdown-driven project cards and detail pages
+- Project frontmatter for status, role, stack, publication date, and AI use
+- Newest, oldest, and title sorting on the projects page
+- Safe Markdown rendering without `v-html`
+- Theme and language preferences stored in the browser
+
+## Stack
+
+- Nuxt 4
+- Vue 3
+- TypeScript
+- CSS custom properties
+- `@nuxtjs/i18n`
+- `@nuxt/icon` with Lucide icons
+- Vitest and Nuxt Test Utils
+
+## Project Content
+
+Project Markdown files live in `content/projects/` and can also be organized in nested directories. Localized files use the `.en.md` and `.nl.md` suffixes.
+
+Example frontmatter:
+
+```yaml
+---
+id: WEB-PORTFOLIO-V1
+label: WEB_SYSTEM
+title: Web Portfolio
+summary: A website where I share my hobby projects.
+status: ONLINE
+role: Full-stack Developer
+publishedOn: 2026-08-08
+AiUse: Design and Development
+stack: Nuxt, Vue, TypeScript, CSS, i18n, Markdown
+---
+```
+
+Markdown body content supports headings, paragraphs, lists, and fenced code blocks. The parser keeps the content as Vue-rendered text rather than injecting raw HTML.
+
+## Routes
+
+- `/` — homepage and featured projects
+- `/projects` — sortable project listing
+- `/projects/:slug` — project detail page
+- `/about` — profile and setup
+- `/privacy` — privacy information
 
 ## Setup
 
-Make sure to install dependencies:
+Install dependencies with pnpm:
 
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Start the development server at `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+## Testing
 
-Build the application for production:
+Run the Nuxt test suite:
 
 ```bash
-# npm
-npm run build
+pnpm test:nuxt --run
+```
 
-# pnpm
+Run tests with coverage:
+
+```bash
+pnpm test:coverage
+```
+
+## Production Build
+
+Build the application:
+
+```bash
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Preview the production build locally:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

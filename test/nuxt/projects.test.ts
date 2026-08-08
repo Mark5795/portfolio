@@ -24,28 +24,25 @@ describe('Markdown-driven projects', () => {
     const page = await mountSuspended(ProjectsPage)
     const cards = page.findAll('.project-card')
 
-    expect(cards).toHaveLength(2)
+    expect(cards).toHaveLength(1)
     expect(cards[0].attributes('href')).toBe('/projects/portfolio')
     expect(page.text()).toContain('Web Portfolio')
     expect(page.text()).toContain('Published Aug 8, 2026')
     expect(page.find('a[href="/projects/portfolio"]').exists()).toBe(true)
   })
 
-  it('sorts projects using the selected sort order', async () => {
+  it('does not show archived projects', async () => {
     const page = await mountSuspended(ProjectsPage)
 
-    await page.find('select[aria-label="Sort projects"]').setValue('oldest')
-    expect(page.findAll('.project-card')[0].attributes('href')).toBe('/projects/k8s-auto-scaler')
-
-    await page.find('select[aria-label="Sort projects"]').setValue('title')
-    expect(page.findAll('.project-card')[0].text()).toContain('K8s Auto-Scaler')
+    expect(page.text()).not.toContain('K8s Auto-Scaler')
+    expect(page.find('a[href="/projects/k8s-auto-scaler"]').exists()).toBe(false)
   })
 
   it('renders Markdown projects on the homepage', async () => {
     const page = await mountSuspended(HomePage)
     const cards = page.findAll('.project-card')
 
-    expect(cards).toHaveLength(2)
+    expect(cards).toHaveLength(1)
     expect(cards[0].attributes('href')).toBe('/projects/portfolio')
     expect(page.text()).toContain('Published Aug 8, 2026')
     expect(page.find('a[href="/projects/portfolio"]').exists()).toBe(true)

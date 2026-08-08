@@ -58,6 +58,8 @@ export const projectSlugFromPath = (filePath) => {
 
 export const projectLocaleFromPath = (filePath) => filePath.match(projectFilePattern)?.[2] ?? ''
 
+export const isArchivedProjectPath = (filePath) => filePath.split('/').includes('archive')
+
 export const projectMatchesLocale = (filePath, locale) => {
   const normalizedLocale = String(locale).split('-')[0]
   return projectLocaleFromPath(filePath) === normalizedLocale

@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: "Mark Kea - Portfolio",
       htmlAttrs: {
         class: "dark",
         lang: "en",

@@ -23,7 +23,7 @@
           <h2>{{ project.title }}</h2>
           <p class="project-published">Published {{ formatPublishedDate(project.publishedOn) }}</p>
           <p>{{ project.summary }}</p>
-          <div class="tag-list" aria-label="Technologies used">
+          <div class="tag-list">
             <span v-for="technology in project.stack" :key="technology">{{ technology }}</span>
           </div>
         </NuxtLink>
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { compareProjectsByPublishedDate, parseProjectMarkdown, projectLocaleFromPath, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
+import { compareProjectsByPublishedDate, isArchivedProjectPath, parseProjectMarkdown, projectLocaleFromPath, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
 
 const { locale, t } = useI18n()
 const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
@@ -48,7 +48,7 @@ const projectFiles = import.meta.glob('../../../content/projects/**/*.md', {
 })
 
 const projects = computed(() => {
-  const paths = Object.keys(projectFiles)
+  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path))
   const slugs = [...new Set(paths.map(projectSlugFromPath))]
 
   const projects = slugs.map((slug) => {

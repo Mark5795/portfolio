@@ -33,5 +33,15 @@
   "externalLinks": "EXTERNE_LINKS",
   "sourceCode": "Broncode",
   "privacy": "Privacy",
+  "privacyTitle": "Privacyverklaring",
+  "privacyIntro": "Op deze pagina lees je hoe deze portfolio omgaat met informatie wanneer je de website bezoekt.",
+  "privacyDataTitle": "Gegevensverzameling",
+  "privacyDataText": "Deze portfolio verzamelt niet bewust persoonsgegevens via formulieren, accounts of trackingprofielen. Serverlogs kunnen basisinformatie over je apparaat bevatten die nodig is om de website te leveren en te beveiligen.",
+  "privacyCookiesTitle": "Cookies en opslag",
+  "privacyCookiesText": "De website gebruikt geen advertentiecookies of analysetrackers. Je taal- en weergavevoorkeuren kunnen lokaal in je browser worden opgeslagen zodat de interface je keuzes kan onthouden.",
+  "privacyExternalTitle": "Externe diensten",
+  "privacyExternalText": "Links naar diensten zoals GitHub en LinkedIn brengen je naar websites van derden. Hun eigen privacyverklaringen gelden zodra je deze portfolio verlaat.",
+  "privacyContactTitle": "Contact",
+  "privacyContactText": "Heb je vragen over deze privacyverklaring of over de informatie die deze website verwerkt? Neem dan contact met mij op via LinkedIn of GitHub.",
   "allRightsReserved": "ALLE RECHTEN VOORBEHOUDEN."
 }
