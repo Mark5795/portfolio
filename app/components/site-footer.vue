@@ -21,8 +21,8 @@ const { t } = useI18n()
 
 <style scoped>
 .site-footer {
-  border-top: 1px solid rgba(144, 144, 151, 0.24);
-  background: rgba(1, 15, 31, 0.58);
+  border-top: 1px solid var(--color-outline-variant);
+  background: var(--color-surface-container-low);
   color: var(--color-on-surface-variant, #c6c6cd);
 }
 

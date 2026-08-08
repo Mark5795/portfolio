@@ -28,3 +28,15 @@ coverage/
 
 # custom files
 stitch_systems_software_lab
+.bash_profile
+.bashrc
+.gitconfig
+.gitmodules
+.mcp.json
+.profile
+.ripgreprc
+.vscode
+.zprofile
+.zshrc
+.claude/agents
+.claude/commands
