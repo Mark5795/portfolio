@@ -1,0 +1,16 @@
+node_modules
+.output
+.nuxt
+.nitro
+.cache
+dist
+coverage
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.vscode
+.claude
+stitch_systems_software_lab
+*.log
