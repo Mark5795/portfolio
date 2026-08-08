@@ -1,5 +1,40 @@
+blockExoticSubdeps: true
+minimumReleaseAge: 10080 # 7 days
 allowBuilds:
   esbuild: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - happy-dom@20.11.2
+  - '@dxup/nuxt@0.5.6'
+  - '@eslint/config-inspector@3.2.0'
+  - '@nuxt/devtools-kit@3.4.1'
+  - '@nuxt/devtools-wizard@3.4.1'
+  - '@nuxt/devtools@3.4.1'
+  - '@nuxt/eslint-config@1.17.0'
+  - '@nuxt/eslint-plugin@1.17.0'
+  - '@nuxt/eslint@1.17.0'
+  - '@nuxt/kit@4.5.2'
+  - '@nuxt/nitro-server@4.5.2'
+  - '@nuxt/schema@4.5.2'
+  - '@nuxt/scripts@1.3.3'
+  - '@nuxt/vite-builder@4.5.2'
+  - '@typescript-eslint/eslint-plugin@8.66.0'
+  - '@typescript-eslint/parser@8.66.0'
+  - '@typescript-eslint/project-service@8.66.0'
+  - '@typescript-eslint/scope-manager@8.66.0'
+  - '@typescript-eslint/tsconfig-utils@8.66.0'
+  - '@typescript-eslint/type-utils@8.66.0'
+  - '@typescript-eslint/types@8.66.0'
+  - '@typescript-eslint/typescript-estree@8.66.0'
+  - '@typescript-eslint/utils@8.66.0'
+  - '@typescript-eslint/visitor-keys@8.66.0'
+  - '@unhead/bundler@3.3.1'
+  - '@unhead/vue@3.3.1'
+  - devframe@0.8.0
+  - eslint-plugin-jsdoc@63.3.3
+  - eslint-plugin-unicorn@73.0.0
+  - globals@17.9.0
+  - nuxt@4.5.2
+  - seroval@1.6.2
+  - undici@8.10.0
+  - unhead@3.3.1
