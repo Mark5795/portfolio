@@ -15,7 +15,7 @@
             <Icon name="lucide:terminal" aria-hidden="true" size="2em" />
           </button>
           <button
-            class="utility-button"
+            class="utility-button settings-toggle"
             type="button"
             :aria-label="t('openSettings')"
             :aria-expanded="settingsOpen"
@@ -70,7 +70,7 @@
           <span>{{ t('openTerminal') }}</span>
         </button>
         <button
-          class="mobile-utility-button"
+          class="mobile-utility-button settings-toggle"
           type="button"
           :aria-label="t('openSettings')"
           :aria-expanded="settingsOpen"
@@ -85,7 +85,7 @@
 
     <ThemeConfirmation
       v-if="lightModeConfirmationOpen"
-      @cancel="lightModeConfirmationOpen = false"
+      @cancel="cancelLightMode"
       @confirm="confirmLightMode"
     />
 
@@ -128,13 +128,27 @@ function confirmLightMode() {
   theme.value = 'light'
 }
 
+function cancelLightMode() {
+  lightModeConfirmationOpen.value = false
+  settingsOpen.value = false
+}
+
+function handleDocumentClick(event: MouseEvent) {
+  const target = event.target
+  if (!(target instanceof Element)) return
+  if (!target.closest('.theme-settings, .settings-toggle')) settingsOpen.value = false
+}
+
 onMounted(() => {
   const savedTheme = localStorage.getItem('portfolio-theme')
   if (savedTheme === 'light' || savedTheme === 'dark') theme.value = savedTheme
   applyTheme()
+  document.addEventListener('click', handleDocumentClick)
 })
 
 watch(theme, () => applyTheme())
+
+onBeforeUnmount(() => document.removeEventListener('click', handleDocumentClick))
 </script>
 
 <style scoped>
