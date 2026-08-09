@@ -43,10 +43,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/eslint",
     "@nuxt/icon",
-    "@nuxt/hints",
-    "@nuxt/image",
-    "@nuxt/scripts",
-    "@nuxt/test-utils",
     "@nuxtjs/i18n",
   ],
 

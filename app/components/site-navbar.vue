@@ -83,13 +83,13 @@
       </div>
     </div>
 
-    <ThemeConfirmation
+    <LazyThemeConfirmation
       v-if="lightModeConfirmationOpen"
       @cancel="cancelLightMode"
       @confirm="confirmLightMode"
     />
 
-    <TerminalEasterEgg v-model:open="terminalOpen" />
+    <LazyTerminalEasterEgg v-model:open="terminalOpen" />
   </header>
 </template>
 

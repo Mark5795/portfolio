@@ -103,10 +103,12 @@ const project = computed(() => parseProjectMarkdown(filePath.value ? projectFile
 
 function formatPublishedDate(date: string) {
   if (!date) return ''
+  const publishedDate = new Date(`${date}T00:00:00`)
+  if (Number.isNaN(publishedDate.getTime())) return ''
   const dateFormatter = locale.value === 'nl'
     ? new Intl.DateTimeFormat('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' })
     : new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' })
-  return dateFormatter.format(new Date(`${date}T00:00:00`))
+  return dateFormatter.format(publishedDate)
 }
 </script>
 

@@ -96,6 +96,39 @@ Preview the production build locally:
 pnpm preview
 ```
 
+## Docker on Raspberry Pi
+
+The production image uses Node 22 and supports Raspberry Pi systems running a 64-bit ARM operating system. Build and run it from the project directory:
+
+```bash
+docker build -t mark-portfolio .
+docker run -d \
+	--name mark-portfolio \
+	--restart unless-stopped \
+	-p 3000:3000 \
+	mark-portfolio
+```
+
+Or use Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+
+Stop the service with:
+
+```bash
+docker compose down
+```
+
+When building on another architecture, target the Pi explicitly:
+
+```bash
+docker buildx build --platform linux/arm64 -t mark-portfolio:arm64 --load .
+```
+
+Open `http://<raspberry-pi-ip>:3000` from another device on the network. The container includes a health check and listens on all interfaces through `HOST=0.0.0.0`.
+
 ## License
 
 This project is open source under the [MIT License](LICENSE).

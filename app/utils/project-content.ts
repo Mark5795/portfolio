@@ -2,6 +2,12 @@ export const projectFilePattern = /^(.*?)(?:\.(en|nl))?\.md$/
 
 const paragraphBlock = (lines) => lines.length ? [{ type: 'paragraph', content: lines.join('\n') }] : []
 
+export const normalizePublishedDate = (value = '') => {
+  const date = value.trim()
+  const dutchDate = date.match(/^(\d{2})-(\d{2})-(\d{4})$/)
+  return dutchDate ? `${dutchDate[3]}-${dutchDate[2]}-${dutchDate[1]}` : date
+}
+
 export const parseInlineMarkdown = (content = '') => {
   const parts = []
   const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
@@ -37,8 +43,10 @@ export const parseProjectMarkdown = (source = '') => {
   for (const line of frontmatterMatch?.[1]?.split('\n') ?? []) {
     const separator = line.indexOf(':')
     if (separator > 0) {
+      const key = line.slice(0, separator).trim()
+      const value = line.slice(separator + 1).trim()
       Object.assign(metadata, {
-        [line.slice(0, separator).trim()]: line.slice(separator + 1).trim()
+        [key]: key === 'publishedOn' ? normalizePublishedDate(value) : value
       })
     }
   }
