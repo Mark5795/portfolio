@@ -21,6 +21,7 @@ WORKDIR /app
 
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/content ./content
+RUN mkdir /app/data && chown node:node /app/data
 
 EXPOSE 3000
 

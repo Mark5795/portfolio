@@ -1,3 +1,5 @@
+.pnpm-store/
+data/*.sqlite*
 # Nuxt dev/build outputs
 .output
 .data

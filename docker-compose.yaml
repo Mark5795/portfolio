@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: mark-portfolio:latest
+    image: ${PORTFOLIO_IMAGE:-mark-portfolio:latest}
     container_name: mark-portfolio
     restart: unless-stopped
     ports:
@@ -12,3 +12,10 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 3000
+      TURNSTILE_SECRET: ${TURNSTILE_SECRET}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - portfolio-data:/app/data
+
+volumes:
+  portfolio-data:

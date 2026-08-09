@@ -43,6 +43,11 @@ export default defineNuxtConfig({
           src: "https://analytics.markkea.nl/script.js",
           "data-website-id": "8a148177-9b24-470c-b2c4-5dea06ea7a07",
         },
+        {
+          async: true,
+          defer: true,
+          src: "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit",
+        },
       ],
     },
   },

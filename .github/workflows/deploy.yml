@@ -48,11 +48,17 @@ jobs:
   deploy:
     needs: build
     runs-on: self-hosted
+    environment: production
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
       - name: Pull nieuwste image & herstart container
+        env:
+          PORTFOLIO_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          docker pull ghcr.io/mark5795/portfolio:latest
-          docker stop mark-portfolio || true
-          docker rm mark-portfolio || true
-          docker compose up -d --build --remove-orphans
+          docker compose pull
+          docker compose up -d --no-build --remove-orphans

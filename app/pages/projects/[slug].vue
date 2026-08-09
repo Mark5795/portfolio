@@ -68,6 +68,8 @@
         </div>
       </section>
 
+      <ProjectComments :slug="slug" />
+
       <footer class="detail-footer">
         <span>root@sys_portfolio:~# cat /projects/{{ route.params.slug }}</span>
         <NuxtLink class="technical-button technical-button-secondary" to="/projects">{{ t('projects') }}</NuxtLink>
