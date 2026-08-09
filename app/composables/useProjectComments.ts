@@ -5,6 +5,7 @@ export type ProjectComment = {
   name: string
   message: string
   createdAt: string
+  approved: boolean
 }
 
 type Turnstile = {

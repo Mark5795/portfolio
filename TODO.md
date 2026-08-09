@@ -1,10 +1,11 @@
 # Project TODOs
 
 ## Backlog Website
-- [ ] Add Matomo
-- [ ] Optimize initial page bundle size
-- [ ] Docker Containerization for production deployment
-- [ ] Pipeline for automated testing and deployment
+- [X] Add analytics
+- [X] Optimize initial page bundle size
+- [x] Docker Containerization for production deployment
+- [x] Pipeline for automated testing and deployment
+- [X] Add comments section for projects and add cloudflare turnstile
 
 ## Website Content
 - [ ] About me page

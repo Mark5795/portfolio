@@ -33,10 +33,17 @@
               <time :datetime="comment.createdAt">{{ formatDate(comment.createdAt) }}</time>
             </div>
             <p>{{ comment.message }}</p>
-            <button class="delete-button" type="button" :disabled="deletingId === comment.id" @click="removeComment(comment.id)">
-              <Icon name="lucide:trash-2" aria-hidden="true" />
-              {{ deletingId === comment.id ? 'Deleting...' : 'Delete' }}
-            </button>
+            <div class="comment-actions">
+              <button v-if="!comment.approved" class="approve-button" type="button" :disabled="approvingId === comment.id" @click="acceptComment(comment.id)">
+                <Icon name="lucide:check" aria-hidden="true" />
+                {{ approvingId === comment.id ? 'Accepting...' : 'Accept' }}
+              </button>
+              <span v-else class="approved-label"><Icon name="lucide:check-circle-2" aria-hidden="true" /> Accepted</span>
+              <button class="delete-button" type="button" :disabled="deletingId === comment.id || approvingId === comment.id" @click="removeComment(comment.id)">
+                <Icon name="lucide:trash-2" aria-hidden="true" />
+                {{ deletingId === comment.id ? 'Deleting...' : 'Delete' }}
+              </button>
+            </div>
           </li>
         </ul>
 
@@ -53,6 +60,7 @@ type AdminComment = {
   name: string
   message: string
   createdAt: string
+  approved: boolean
 }
 
 type AdminSession = {
@@ -66,6 +74,7 @@ const configured = ref(true)
 const comments = ref<AdminComment[]>([])
 const loading = ref(false)
 const deletingId = ref<number | null>(null)
+const approvingId = ref<number | null>(null)
 const errorMessage = ref('')
 
 const session = await $fetch<AdminSession>('/api/admin/session')
@@ -109,6 +118,20 @@ async function logout() {
   await $fetch('/api/admin/logout', { method: 'POST' })
   authenticated.value = false
   comments.value = []
+}
+
+async function acceptComment(id: number) {
+  approvingId.value = id
+  errorMessage.value = ''
+  try {
+    await $fetch(`/api/admin/comments/${id}`, { method: 'PATCH' })
+    const comment = comments.value.find((item) => item.id === id)
+    if (comment) comment.approved = true
+  } catch {
+    errorMessage.value = 'The comment could not be accepted.'
+  } finally {
+    approvingId.value = null
+  }
 }
 
 async function removeComment(id: number) {
@@ -250,9 +273,6 @@ function formatDate(date: string) {
 }
 
 .delete-button {
-  position: absolute;
-  top: 14px;
-  right: 14px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -276,6 +296,44 @@ function formatDate(date: string) {
   opacity: 0.5;
 }
 
+.comment-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.approve-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 7px 9px;
+  background: transparent;
+  color: var(--color-tertiary);
+  font: 13px/1.2 var(--font-mono);
+  cursor: pointer;
+}
+
+.approve-button:hover,
+.approve-button:focus-visible {
+  background: var(--color-tertiary);
+  color: var(--color-surface-container-lowest);
+}
+
+.approved-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 0;
+  color: var(--color-tertiary);
+  font: 13px/1.2 var(--font-mono);
+}
+
 @media (max-width: 600px) {
   .admin-page {
     width: min(calc(100% - 32px), 1000px);
@@ -294,6 +352,12 @@ function formatDate(date: string) {
   .admin-comment {
     padding-right: 16px;
     padding-top: 54px;
+  }
+
+  .comment-actions {
+    left: 16px;
+    right: 16px;
+    justify-content: flex-start;
   }
 }
 </style>

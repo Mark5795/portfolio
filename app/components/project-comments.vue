@@ -1,11 +1,11 @@
 <template>
   <section class="comments-section" aria-labelledby="comments-title">
     <p class="section-kicker">&gt; COMMUNITY_INPUT</p>
-    <h2 id="comments-title">Comments</h2>
+    <h2 id="comments-title">{{ t('commentsTitle') }}</h2>
 
-    <div v-if="commentsPending" class="comments-status" role="status">Loading comments...</div>
-    <div v-else-if="commentsError" class="comments-status" role="status">Comments are temporarily unavailable.</div>
-    <p v-else-if="!comments.length" class="comments-status">Be the first to comment.</p>
+    <div v-if="commentsPending" class="comments-status" role="status">{{ t('loadingComments') }}</div>
+    <div v-else-if="commentsError" class="comments-status" role="status">{{ t('commentsUnavailable') }}</div>
+    <p v-else-if="!comments.length" class="comments-status">{{ t('firstComment') }}</p>
     <ol v-else class="comment-list">
       <li v-for="comment in comments" :key="comment.id" class="comment">
         <div class="comment-header">
@@ -18,12 +18,12 @@
 
     <form class="comment-form" @submit.prevent="submitComment">
       <div class="comment-field">
-        <label for="comment-name">Name</label>
+        <label for="comment-name">{{ t('commentName') }}</label>
         <input id="comment-name" v-model="commentName" type="text" maxlength="80" autocomplete="name" required>
       </div>
 
       <div class="comment-field">
-        <label for="comment-message">Message</label>
+        <label for="comment-message">{{ t('commentMessage') }}</label>
         <textarea id="comment-message" v-model="commentMessage" maxlength="2000" rows="5" required />
       </div>
 
@@ -36,17 +36,31 @@
 
       <button class="technical-button technical-button-primary" type="submit" :disabled="submitting || !turnstileToken">
         <Icon name="lucide:send" aria-hidden="true" />
-        {{ submitting ? 'Sending...' : 'Post comment' }}
+        {{ submitting ? t('sendingComment') : t('postComment') }}
       </button>
       <p v-if="submitError" class="comments-status" role="alert">{{ submitError }}</p>
-      <p v-if="submitted" class="comments-status" role="status">Comment posted.</p>
     </form>
+
+    <div v-if="submitted" class="comment-confirmation-backdrop" @click.self="closeConfirmation">
+      <section class="comment-confirmation" role="alertdialog" aria-modal="true" aria-labelledby="comment-confirmation-title">
+        <p class="confirmation-kicker">&gt; {{ t('commentsTitle') }}</p>
+        <h2 id="comment-confirmation-title">{{ t('commentPosted') }}</h2>
+        <p>{{ t('commentPostedDescription') }}</p>
+        <div class="confirmation-actions">
+          <button class="confirmation-button confirmation-button-primary" type="button" @click="closeConfirmation">
+            {{ t('close') }}
+          </button>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import { useProjectComments } from '~/composables/useProjectComments'
 
+const { t } = useI18n()
 const props = defineProps<{ slug: string }>()
 const turnstileContainer = ref<HTMLElement | null>(null)
 const {
@@ -62,6 +76,10 @@ const {
   submitComment,
   formatCommentDate,
 } = await useProjectComments(props.slug, turnstileContainer)
+
+function closeConfirmation() {
+  submitted.value = false
+}
 </script>
 
 <style scoped>
@@ -87,6 +105,72 @@ const {
   margin: 0;
   color: var(--color-on-surface-variant);
   font: 16px/1.5 var(--font-mono);
+}
+
+.comment-confirmation-backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(1, 15, 31, 0.72);
+}
+
+.comment-confirmation {
+  width: min(100%, 420px);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  background: var(--color-surface-container);
+  box-shadow: 0 18px 48px rgba(1, 15, 31, 0.45);
+}
+
+.confirmation-kicker {
+  margin: 0 0 16px;
+  color: var(--color-primary);
+  font: 700 14px/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+.comment-confirmation h2 {
+  margin: 0;
+  color: var(--color-on-surface);
+  font: 700 20px/1.3 var(--font-mono);
+}
+
+.comment-confirmation > p:not(.confirmation-kicker) {
+  margin: 12px 0 24px;
+  color: var(--color-on-surface-variant);
+  font: 16px/1.5 var(--font-sans);
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.confirmation-button {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: transparent;
+  color: var(--color-on-surface);
+  font: 700 14px/1.2 var(--font-mono);
+  cursor: pointer;
+}
+
+.confirmation-button:hover,
+.confirmation-button:focus-visible {
+  border-color: var(--color-tertiary);
+  color: var(--color-tertiary);
+}
+
+.confirmation-button-primary {
+  border-color: var(--color-primary);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
 }
 
 .comment-list {
