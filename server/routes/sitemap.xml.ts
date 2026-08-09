@@ -1,3 +1,5 @@
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { getRequestURL, setHeader } from 'h3'
 import {
   isArchivedProjectPath,
@@ -6,11 +8,15 @@ import {
   projectSlugFromPath,
 } from '../../app/utils/project-content'
 
-const projectFiles = import.meta.glob('../../content/projects/**/*.md', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-})
+const projectDirectory = join(process.cwd(), 'content', 'projects')
+
+const readProjectFiles = (directory: string): Array<[string, string]> => readdirSync(directory, { withFileTypes: true })
+  .flatMap((entry) => {
+    const filePath = join(directory, entry.name)
+    if (entry.isDirectory()) return readProjectFiles(filePath)
+    if (!entry.isFile() || !entry.name.endsWith('.md')) return []
+    return [[filePath, readFileSync(filePath, 'utf8')]]
+  })
 
 const escapeXml = (value: string) => value
   .replaceAll('&', '&amp;')
@@ -27,11 +33,12 @@ export default defineEventHandler((event) => {
     urls.set(path, '')
   }
 
-  for (const [path, source] of Object.entries(projectFiles)) {
-    if (isArchivedProjectPath(path)) continue
+  for (const [filePath, source] of readProjectFiles(projectDirectory)) {
+    const relativePath = filePath.slice(projectDirectory.length + 1)
+    if (isArchivedProjectPath(relativePath)) continue
 
-    const slug = projectSlugFromPath(path)
-    const locale = projectLocaleFromPath(path)
+    const slug = projectSlugFromPath(relativePath)
+    const locale = projectLocaleFromPath(relativePath)
     if (!slug || (locale && locale !== 'en')) continue
 
     const project = parseProjectMarkdown(String(source))

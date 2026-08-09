@@ -18,16 +18,16 @@
           <p class="section-heading"><span aria-hidden="true">&gt;</span> <span id="setup-title">{{ t('currentSetup') }}</span></p>
           <div class="setup-grid">
             <article class="setup-card">
-              <h2><Icon name="lucide:cpu" aria-hidden="true" /> HARDWARE_SPECS</h2>
+              <h2><Icon name="lucide:cpu" aria-hidden="true" /> SERVER_SPECS</h2>
               <dl>
-                <div><dt>[CPU]</dt><dd>AMD Ryzen 9 7950X</dd></div>
-                <div><dt>[RAM]</dt><dd>64GB DDR5-6000</dd></div>
-                <div><dt>[GPU]</dt><dd>NVIDIA RTX 4080</dd></div>
-                <div><dt>[STORAGE]</dt><dd>2TB NVMe Gen4</dd></div>
-                <div><dt>[MONITOR]</dt><dd>2x 27&quot; 4K IPS</dd></div>
+                <div><dt>[DEVICE]</dt><dd>Raspberry Pi 3 Model B</dd></div>
+                <div><dt>[CPU]</dt><dd>Broadcom BCM2837 1.2GHz</dd></div>
+                <div><dt>[RAM]</dt><dd>1GB</dd></div>
+                <div><dt>[STORAGE]</dt><dd>PHILIPS 128GB SD Card</dd></div>
+                <div><dt>[OS]</dt><dd>Raspberry Pi OS Lite 64bit</dd></div>
               </dl>
             </article>
-            <article class="setup-card">
+            <!-- <article class="setup-card">
               <h2><Icon name="lucide:code" aria-hidden="true" /> SOFTWARE_ENV</h2>
               <dl>
                 <div><dt>[OS]</dt><dd>Arch Linux / i3wm</dd></div>
@@ -36,7 +36,7 @@
                 <div><dt>[SHELL]</dt><dd>Zsh (Powerlevel10k)</dd></div>
                 <div><dt>[BROWSER]</dt><dd>Firefox Developer</dd></div>
               </dl>
-            </article>
+            </article> -->
           </div>
         </section>
       </section>
