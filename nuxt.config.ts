@@ -17,6 +17,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Mark Kea - Portfolio",
+      meta: [
+        {
+          name: "description",
+          content: "Mark Kea's technical portfolio of web, infrastructure, and software projects.",
+        },
+      ],
       htmlAttrs: {
         class: "dark",
         lang: "en",
