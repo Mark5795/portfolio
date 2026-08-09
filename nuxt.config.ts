@@ -37,6 +37,13 @@ export default defineNuxtConfig({
           href: "/favicon.svg",
         },
       ],
+      script: [
+        {
+          defer: true,
+          src: "https://analytics.markkea.nl/script.js",
+          "data-website-id": "8a148177-9b24-470c-b2c4-5dea06ea7a07",
+        },
+      ],
     },
   },
 
