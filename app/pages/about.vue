@@ -5,38 +5,146 @@
         <p class="terminal-heading" aria-hidden="true">&gt; <span>{{ t('overMe') }}</span></p>
         <h1 id="about-title" class="sr-only">{{ t('overMe') }}</h1>
         <article class="intro-card">
-          <p>{{ t('aboutDescription') }}</p>
-          <div class="tag-list">
-            <span>Linux/Unix</span>
-            <span>Kubernetes</span>
-            <span>CI/CD Pipeline</span>
-            <span>Python/Bash</span>
-          </div>
+          <p>{{ aboutDescription }}</p>
         </article>
 
         <section class="setup-section" aria-labelledby="setup-title">
-          <p class="section-heading"><span aria-hidden="true">&gt;</span> <span id="setup-title">{{ t('currentSetup') }}</span></p>
+          <p class="section-heading"><span aria-hidden="true">&gt;</span> <span id="setup-title">{{ t('currentSetup')
+              }}</span></p>
           <div class="setup-grid">
             <article class="setup-card">
-              <h2><Icon name="lucide:cpu" aria-hidden="true" /> SERVER_SPECS</h2>
+              <h2>
+                <Icon name="lucide:cpu" aria-hidden="true" /> WEBSERVER_SPECS
+              </h2>
               <dl>
-                <div><dt>[DEVICE]</dt><dd>Raspberry Pi 3 Model B</dd></div>
-                <div><dt>[CPU]</dt><dd>Broadcom BCM2837 1.2GHz</dd></div>
-                <div><dt>[RAM]</dt><dd>1GB</dd></div>
-                <div><dt>[STORAGE]</dt><dd>PHILIPS 128GB SD Card</dd></div>
-                <div><dt>[OS]</dt><dd>Raspberry Pi OS Lite 64bit</dd></div>
+                <div>
+                  <dt>[DEVICE]</dt>
+                  <dd>Raspberry Pi 3 Model B</dd>
+                </div>
+                <div>
+                  <dt>[CPU]</dt>
+                  <dd>Broadcom BCM2837 @ 1.2GHz</dd>
+                </div>
+                <div>
+                  <dt>[RAM]</dt>
+                  <dd>1GB</dd>
+                </div>
+                <div>
+                  <dt>[STORAGE]</dt>
+                  <dd>PHILIPS 128GB SD Card</dd>
+                </div>
+                <div>
+                  <dt>[OS]</dt>
+                  <dd>Raspberry Pi OS Lite 64bit</dd>
+                </div>
+                <div>
+                  <dt>[FUNCTION]</dt>
+                  <dd>Webserver</dd>
+                </div>
               </dl>
             </article>
-            <!-- <article class="setup-card">
-              <h2><Icon name="lucide:code" aria-hidden="true" /> SOFTWARE_ENV</h2>
+            <article class="setup-card">
+              <h2>
+                <Icon name="lucide:cpu" aria-hidden="true" /> NAS_SPECS
+              </h2>
               <dl>
-                <div><dt>[OS]</dt><dd>Arch Linux / i3wm</dd></div>
-                <div><dt>[EDITOR]</dt><dd>Neovim (LunaVim)</dd></div>
-                <div><dt>[TERMINAL]</dt><dd>Alacritty + Tmux</dd></div>
-                <div><dt>[SHELL]</dt><dd>Zsh (Powerlevel10k)</dd></div>
-                <div><dt>[BROWSER]</dt><dd>Firefox Developer</dd></div>
+                <div>
+                  <dt>[DEVICE]</dt>
+                  <dd>Unraid Server</dd>
+                </div>
+                <div>
+                  <dt>[CPU]</dt>
+                  <dd>Intel Core i5-9600K @ 3.70GHz</dd>
+                </div>
+                <div>
+                  <dt>[GPU]</dt>
+                  <dd>NVIDIA GeForce GTX 1060 6GB</dd>
+                </div>
+                <div>
+                  <dt>[RAM]</dt>
+                  <dd>32GB</dd>
+                </div>
+                <div>
+                  <dt>[STORAGE]</dt>
+                  <dd>34TB HDD</dd>
+                </div>
+                <div>
+                  <dt>[CACHE]</dt>
+                  <dd>500GB SSD</dd>
+                </div>
+                <div>
+                  <dt>[OS]</dt>
+                  <dd>Unraid OS</dd>
+                </div>
+                <div>
+                  <dt>[FUNCTION]</dt>
+                  <dd>Data storage, Media server, NVR, Docker host</dd>
+                </div>
               </dl>
-            </article> -->
+            </article>
+            <article class="setup-card">
+              <h2>
+                <Icon name="lucide:cpu" aria-hidden="true" /> FIREWALL_SERVER_SPECS
+              </h2>
+              <dl>
+                <div>
+                  <dt>[DEVICE]</dt>
+                  <dd>Topton</dd>
+                </div>
+                <div>
+                  <dt>[CPU]</dt>
+                  <dd>Intel(R) N100 @ 3.4GHz</dd>
+                </div>
+                <div>
+                  <dt>[RAM]</dt>
+                  <dd>32GB</dd>
+                </div>
+                <div>
+                  <dt>[STORAGE]</dt>
+                  <dd>1500GB SSD</dd>
+                </div>
+                <div>
+                  <dt>[OS]</dt>
+                  <dd>Proxmox</dd>
+                </div>
+                <div>
+                  <dt>[FUNCTION]</dt>
+                  <dd>OPNSense Firewall, HomeAssistant, UniFi Controller, Docker Host</dd>
+                </div>
+              </dl>
+            </article>
+            <article class="setup-card">
+              <h2>
+                <Icon name="lucide:cpu" aria-hidden="true" /> SYN_NAS_SPECS
+              </h2>
+              <dl>
+                <div>
+                  <dt>[DEVICE]</dt>
+                  <dd>Synology NAS DS120j</dd>
+                </div>
+                <div>
+                  <dt>[CPU]</dt>
+                  <dd>Marvell Armada 3700 88F3720 @ 800MHz</dd>
+                </div>
+                <div>
+                  <dt>[RAM]</dt>
+                  <dd>512MB</dd>
+                </div>
+                <div>
+                  <dt>[STORAGE]</dt>
+                  <dd>8TB HDD</dd>
+                </div>
+                <div>
+                  <dt>[OS]</dt>
+                  <dd>Synology DSM</dd>
+                </div>
+                <div>
+                  <dt>[FUNCTION]</dt>
+                  <dd>Offsite Backup of Unraid Data</dd>
+                </div>
+              </dl>
+            </article>
+
           </div>
         </section>
       </section>
@@ -64,9 +172,47 @@
         <div class="external-links">
           <p>{{ t('externalLinks') }}</p>
           <div>
-            <a href="https://github.com/Mark5795" target="_blank" rel="noreferrer"><Icon name="lucide:github" aria-hidden="true" /> GitHub</a>
-            <a href="https://www.linkedin.com/in/markkea/" target="_blank" rel="noreferrer"><Icon name="lucide:linkedin" aria-hidden="true" /> LinkedIn</a>
+            <a href="https://github.com/Mark5795" target="_blank" rel="noreferrer">
+              <Icon name="lucide:github" aria-hidden="true" /> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/markkea/" target="_blank" rel="noreferrer">
+              <Icon name="lucide:linkedin" aria-hidden="true" /> LinkedIn
+            </a>
           </div>
+        </div>
+
+        <div class="tag-list">
+          <p class="tag-list-title">{{ t('vaardigheden') }}</p>
+          <span>Linux</span>
+          <span>CI/CD Pipeline</span>
+          <span>Python</span>
+          <span>Bash</span>
+          <span>PHP</span>
+          <span>JavaScript/TypeScript</span>
+          <span>SQL</span>
+          <span>Nuxt/Vue</span>
+          <span>Docker</span>
+          <span>Kubernetes</span>
+          <span>Laravel</span>
+          <span>PostgreSQL</span>
+          <span>WiFi</span>
+          <span>Networking</span>
+          <span>UniFi</span>
+          <span>Meraki</span>
+          <span>Teltonika</span>
+          <span>Fortinet</span>
+          <span>Cloudflare</span>
+          <span>MQTT</span>
+          <span>Nagios</span>
+          <span>Grafana</span>
+          <span>Scrum</span>
+          <span>Arduino</span>
+          <span>ESP</span>
+          <span>Raspberry Pi</span>
+          <span>DigitalOcean</span>
+          <span>Unraid</span>
+          <span>OPNsense</span>
+          <span>Proxmox</span>
         </div>
       </aside>
     </main>
@@ -76,15 +222,24 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const contactName = ref('')
-const contactEmail = ref('')
-const contactMessage = ref('')
-const submitted = ref(false)
-const { t } = useI18n()
+// const contactName = ref('')
+// const contactEmail = ref('')
+// const contactMessage = ref('')
+// const submitted = ref(false)
+const { locale, t } = useI18n()
+const aboutFiles = import.meta.glob('../../content/about.*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+})
+const aboutDescription = computed(() => {
+  const filePath = `../../content/about.${locale.value}.md`
+  return String(aboutFiles[filePath] || '')
+})
 
-function submitContact() {
-  submitted.value = true
-}
+// function submitContact() {
+//   submitted.value = true
+// }
 </script>
 
 <style scoped>
@@ -128,7 +283,7 @@ function submitContact() {
   padding: 24px;
 }
 
-.intro-card p {
+.intro-card>p {
   margin: 0;
   color: var(--color-on-surface);
   font-size: 16px;
@@ -136,18 +291,39 @@ function submitContact() {
 }
 
 .tag-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
   gap: 8px;
-  margin-top: 16px;
+  align-content: start;
+  margin-top: 32px;
+  border-top: 1px solid var(--color-outline-variant);
+  padding-top: 24px;
+}
+
+.tag-list-title {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+  color: var(--color-on-surface-variant);
+  font: 700 14px/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .tag-list span {
   border: 1px solid var(--color-outline-variant);
   border-radius: var(--radius-sm);
-  padding: 7px 10px;
+  padding: 9px 10px;
+  background: var(--color-surface-container);
   color: var(--color-tertiary);
-  font: 16px/1.2 var(--font-mono);
+  font: 14px/1.25 var(--font-mono);
+  text-align: center;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.tag-list span:hover {
+  border-color: var(--color-tertiary);
+  background: var(--color-surface-container-high, var(--color-surface-container));
+  transform: translateY(-1px);
 }
 
 .setup-section {
@@ -156,7 +332,7 @@ function submitContact() {
 
 .setup-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
@@ -229,7 +405,7 @@ function submitContact() {
 }
 
 .contact-form label,
-.external-links > p {
+.external-links>p {
   color: var(--color-on-surface-variant);
   font: 700 16px/1.2 var(--font-mono);
   letter-spacing: 0.06em;
@@ -278,11 +454,11 @@ function submitContact() {
   margin-top: 24px;
 }
 
-.external-links > p {
+.external-links>p {
   margin: 0 0 12px;
 }
 
-.external-links > div {
+.external-links>div {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;

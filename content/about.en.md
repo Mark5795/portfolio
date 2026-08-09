@@ -1,0 +1,1 @@
+Hi! I am Mark, working as a Tech Lead at Cobra Systems. I combine full-stack software engineering with the complete management of our IT infrastructure: from networks, databases, and pipelines to security and day-to-day support.

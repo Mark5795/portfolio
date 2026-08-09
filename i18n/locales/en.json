@@ -33,9 +33,8 @@
   "distributedDescription": "A custom distributed key-value store built in Rust, optimized for low latency and high throughput.",
   "autoscalerDescription": "Advanced Kubernetes operator for predictive auto-scaling based on historical metrics and machine learning models.",
   "overMe": "About Me",
-  "aboutDescription": "System administrator and DevOps engineer passionate about scalable infrastructure and robust networks. Specialized in cloud-native solutions, automation (Ansible/Terraform), and high-availability systems. My focus is always on performance, security, and minimizing downtime through proactive monitoring.",
   "specializations": "Specializations",
-  "currentSetup": "Current_Setup",
+  "currentSetup": "Current_Setups",
   "initializeContact": "Initialize_Contact",
   "nameLabel": "USER_ID / NAME",
   "namePlaceholder": "Enter your name...",
@@ -58,5 +57,6 @@
   "privacyExternalText": "Links to services such as GitHub and LinkedIn take you to third-party websites. Their own privacy policies apply when you leave this portfolio.",
   "privacyContactTitle": "Contact",
   "privacyContactText": "For questions about this privacy policy or the information handled by this website, contact me through LinkedIn or GitHub.",
-  "allRightsReserved": "ALL RIGHTS RESERVED."
+  "allRightsReserved": "ALL RIGHTS RESERVED.",
+  "vaardigheden": "Skills"
 }
