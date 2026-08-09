@@ -55,9 +55,4 @@ jobs:
           docker pull ghcr.io/mark5795/portfolio:latest
           docker stop mark-portfolio || true
           docker rm mark-portfolio || true
-          docker run -d \
-            --name mark-portfolio \
-            --restart always \
-            -p 3000:3000 \
-            ghcr.io/mark5795/portfolio:latest
-          docker image prune -f
+          docker compose up -d --build --remove-orphans

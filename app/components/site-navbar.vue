@@ -29,11 +29,11 @@
         <div v-show="settingsOpen" id="theme-settings" class="theme-settings" role="dialog" :aria-label="t('openSettings')">
           <p class="settings-title">{{ t('displayTheme') }}</p>
           <label class="theme-option">
-            <input v-model="theme" type="radio" value="dark">
+            <input :checked="theme === 'dark'" type="radio" name="site-theme" value="dark" @change="selectTheme('dark')">
             <span>{{ t('darkMode') }}</span>
           </label>
           <label class="theme-option">
-            <input v-model="theme" type="radio" value="light">
+            <input :checked="theme === 'light'" type="radio" name="site-theme" value="light" @change="selectTheme('light')">
             <span>{{ t('lightMode') }}</span>
           </label>
           <p class="settings-title language-title">{{ t('language') }}</p>
@@ -83,6 +83,12 @@
       </div>
     </div>
 
+    <ThemeConfirmation
+      v-if="lightModeConfirmationOpen"
+      @cancel="lightModeConfirmationOpen = false"
+      @confirm="confirmLightMode"
+    />
+
     <TerminalEasterEgg v-model:open="terminalOpen" />
   </header>
 </template>
@@ -94,6 +100,7 @@ const menuOpen = ref(false)
 const terminalOpen = ref(false)
 const settingsOpen = ref(false)
 const theme = ref('dark')
+const lightModeConfirmationOpen = ref(false)
 const { locale, t, setLocale } = useI18n()
 
 function applyTheme() {
@@ -106,6 +113,19 @@ function applyTheme() {
 function openTerminal() {
   menuOpen.value = false
   terminalOpen.value = true
+}
+
+function selectTheme(nextTheme: 'dark' | 'light') {
+  if (nextTheme === 'light' && theme.value !== 'light') {
+    lightModeConfirmationOpen.value = true
+    return
+  }
+  theme.value = nextTheme
+}
+
+function confirmLightMode() {
+  lightModeConfirmationOpen.value = false
+  theme.value = 'light'
 }
 
 onMounted(() => {

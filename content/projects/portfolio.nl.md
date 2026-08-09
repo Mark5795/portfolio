@@ -6,7 +6,7 @@ summary: Een website waar ik mijn hobbyprojecten deel.
 status: ONLINE
 role: Full-stack Developer
 AiUse: Design en Development
-publishedOn: 2026-08-08
+publishedOn: 08-08-2026
 stack: Nuxt, Vue, TypeScript, CSS, i18n, Markdown, GitHub Copilot
 ---
 
