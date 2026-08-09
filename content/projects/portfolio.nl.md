@@ -6,7 +6,7 @@ summary: Een website waar ik mijn hobbyprojecten deel.
 status: ONLINE
 role: Full-stack Developer
 AiUse: Design en Development
-publishedOn: 08-08-2026
+publishedOn: 2026-08-08
 stack: Nuxt, Vue, TypeScript, CSS, i18n, Markdown, GitHub Copilot
 ---
 
@@ -30,3 +30,5 @@ Nog een paar easter eggs toegevoegd, (heb jij ze al gevonden?) en toen was de we
 
 ## Conclusie
 De website is een weerspiegeling van mijn hobby's en interesses, en het gebruik van AI heeft het proces aanzienlijk versneld. Het is een leuke manier om mijn projecten te delen en anderen te inspireren, terwijl ik tegelijkertijd mijn vaardigheden in webontwikkeling en AI-toepassingen verder ontwikkel.
+
+Bekijk de source code van de website op [GitHub](https://github.com/Mark5795/portfolio).

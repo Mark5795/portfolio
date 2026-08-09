@@ -45,7 +45,6 @@ import { compareProjectsByPublishedDate, isArchivedProjectPath, parseProjectMark
 const headlines = ['Building Software.', 'Managing People.', 'Solving Problems.', 'Managing Infrastructure.', 'Scaling Hardware.' ]
 const { locale, t } = useI18n()
 const currentHeadline = ref(headlines[0])
-const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
 const projectFiles = import.meta.glob('../../content/projects/**/*.md', {
   eager: true,
   query: '?raw',
@@ -68,7 +67,11 @@ const projects = computed(() => {
 })
 
 function formatPublishedDate(date) {
-  return date ? dateFormatter.format(new Date(`${date}T00:00:00`)) : ''
+  if (!date) return ''
+  const dateFormatter = locale.value === 'nl'
+    ? new Intl.DateTimeFormat('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    : new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' })
+  return dateFormatter.format(new Date(`${date}T00:00:00`))
 }
 
 let headlineIndex = 0

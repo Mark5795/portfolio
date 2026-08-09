@@ -30,3 +30,4 @@ I also added a few easter eggs. Have you found them yet? With that, the website 
 
 ## Conclusion
 The website reflects my hobbies and interests, and using AI significantly accelerated the process. It is a fun way to share my projects and inspire others, while continuing to develop my skills in web development and AI applications.
+View the website source code on [GitHub](https://github.com/Mark5795/portfolio).

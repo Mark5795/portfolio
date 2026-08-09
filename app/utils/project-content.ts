@@ -2,6 +2,22 @@ export const projectFilePattern = /^(.*?)(?:\.(en|nl))?\.md$/
 
 const paragraphBlock = (lines) => lines.length ? [{ type: 'paragraph', content: lines.join('\n') }] : []
 
+export const parseInlineMarkdown = (content = '') => {
+  const parts = []
+  const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
+  let lastIndex = 0
+
+  for (const match of content.matchAll(linkPattern)) {
+    const matchIndex = match.index ?? 0
+    if (matchIndex > lastIndex) parts.push({ type: 'text', content: content.slice(lastIndex, matchIndex) })
+    parts.push({ type: 'link', content: match[1], href: match[2] })
+    lastIndex = matchIndex + match[0].length
+  }
+
+  if (lastIndex < content.length) parts.push({ type: 'text', content: content.slice(lastIndex) })
+  return parts.length ? parts : [{ type: 'text', content }]
+}
+
 export const parseProjectMarkdown = (source = '') => {
   const normalizedSource = source.replaceAll('\r\n', '\n')
   const frontmatterMatch = normalizedSource.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/)

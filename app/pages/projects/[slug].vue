@@ -22,7 +22,12 @@
           <div class="markdown-content">
             <template v-for="(block, index) in project.contentBlocks" :key="index">
               <h3 v-if="block.type === 'heading'">{{ block.content }}</h3>
-              <p v-else-if="block.type === 'paragraph'">{{ block.content }}</p>
+              <p v-else-if="block.type === 'paragraph'">
+                <template v-for="(part, partIndex) in parseInlineMarkdown(block.content)" :key="partIndex">
+                  <a v-if="part.type === 'link'" :href="part.href" target="_blank" rel="noreferrer">{{ part.content }}</a>
+                  <template v-else>{{ part.content }}</template>
+                </template>
+              </p>
               <ul v-else-if="block.type === 'list'">
                 <li v-for="item in block.items || []" :key="item">{{ item }}</li>
               </ul>
@@ -73,11 +78,10 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { isArchivedProjectPath, parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
+import { isArchivedProjectPath, parseInlineMarkdown, parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
 
 const route = useRoute()
 const { locale, t } = useI18n()
-const dateFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' })
 const projectFiles = import.meta.glob('../../../content/projects/**/*.md', {
   eager: true,
   query: '?raw',
@@ -98,7 +102,11 @@ if (!filePath.value) {
 const project = computed(() => parseProjectMarkdown(filePath.value ? projectFiles[filePath.value] : ''))
 
 function formatPublishedDate(date: string) {
-  return date ? dateFormatter.format(new Date(`${date}T00:00:00`)) : ''
+  if (!date) return ''
+  const dateFormatter = locale.value === 'nl'
+    ? new Intl.DateTimeFormat('nl-NL', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    : new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' })
+  return dateFormatter.format(new Date(`${date}T00:00:00`))
 }
 </script>
 
