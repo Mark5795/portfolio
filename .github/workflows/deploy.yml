@@ -1,0 +1,18 @@
+name: Deploy to serverpi
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Build & Run Docker container
+        run: |
+          docker compose up -d --build
