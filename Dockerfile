@@ -12,6 +12,9 @@ RUN apt-get update \
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
+RUN find node_modules/.pnpm -path '*/better-sqlite3/prebuilds' -type d -prune -exec rm -rf {} + \
+  && npm rebuild better-sqlite3 --build-from-source \
+  && node -e "const Database = require('better-sqlite3'); const database = new Database(':memory:'); database.prepare('SELECT 1').get(); database.close()"
 
 COPY . .
 RUN ./node_modules/.bin/nuxt build
