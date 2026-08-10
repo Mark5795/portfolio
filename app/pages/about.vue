@@ -188,7 +188,9 @@
           <span>Python</span>
           <span>Bash</span>
           <span>PHP</span>
-          <span>JavaScript/TypeScript</span>
+          <span>JavaScript</span>
+          <span>TypeScript</span>
+          <span>YAML</span>
           <span>SQL</span>
           <span>Nuxt/Vue</span>
           <span>Docker</span>
