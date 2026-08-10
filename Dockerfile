@@ -1,9 +1,8 @@
-FROM node:22-bookworm-slim AS build
+FROM node:22-trixie-slim AS build
 
 WORKDIR /app
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
-ENV npm_config_build_from_source=true
 RUN apt-get update \
   && apt-get install -y --no-install-recommends python3 make g++ \
   && rm -rf /var/lib/apt/lists/* \
@@ -12,14 +11,11 @@ RUN apt-get update \
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
-RUN find node_modules/.pnpm -path '*/better-sqlite3/prebuilds' -type d -prune -exec rm -rf {} + \
-  && npm rebuild better-sqlite3 --build-from-source \
-  && node -e "const Database = require('better-sqlite3'); const database = new Database(':memory:'); database.prepare('SELECT 1').get(); database.close()"
 
 COPY . .
 RUN ./node_modules/.bin/nuxt build
 
-FROM node:22-bookworm-slim AS runtime
+FROM node:22-trixie-slim AS runtime
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
