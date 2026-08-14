@@ -35,7 +35,7 @@ export default defineEventHandler((event) => {
 
   for (const [filePath, source] of readProjectFiles(projectDirectory)) {
     const relativePath = filePath.slice(projectDirectory.length + 1)
-    if (isArchivedProjectPath(relativePath)) continue
+    if (isArchivedProjectPath(relativePath) || isDraftProjectPath(relativePath)) continue
 
     const slug = projectSlugFromPath(relativePath)
     const locale = projectLocaleFromPath(relativePath)

@@ -4,8 +4,8 @@ WORKDIR /app
 
 ENV COREPACK_DEFAULT_TO_LATEST=0
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3 make g++ \
-  && rm -rf /var/lib/apt/lists/* \
+#   && apt-get install -y --no-install-recommends python3 make g++ \
+#   && rm -rf /var/lib/apt/lists/* \
   && corepack enable \
   && corepack prepare pnpm@9.15.9 --activate
 

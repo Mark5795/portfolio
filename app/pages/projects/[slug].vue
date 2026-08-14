@@ -80,7 +80,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { isArchivedProjectPath, parseInlineMarkdown, parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
+import { isArchivedProjectPath, isDraftProjectPath, parseInlineMarkdown, parseProjectMarkdown, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -92,7 +92,7 @@ const projectFiles = import.meta.glob('../../../content/projects/**/*.md', {
 
 const slug = String(route.params.slug)
 const filePath = computed(() => {
-  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path))
+  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path) && !isDraftProjectPath(path))
   return paths.find((path) => projectSlugFromPath(path) === slug && projectMatchesLocale(path, locale.value))
     ?? paths.find((path) => projectSlugFromPath(path) === slug && !projectMatchesLocale(path, locale.value))
 })

@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { parseProjectMarkdown } from '../../app/utils/project-content'
+import { isDraftProjectPath, parseProjectMarkdown } from '../../app/utils/project-content'
 import HomePage from '../../app/pages/index.vue'
 import ProjectsPage from '../../app/pages/projects/index.vue'
 
@@ -36,6 +36,11 @@ describe('Markdown-driven projects', () => {
 
     expect(page.text()).not.toContain('K8s Auto-Scaler')
     expect(page.find('a[href="/projects/k8s-auto-scaler"]').exists()).toBe(false)
+  })
+
+  it('recognizes draft project paths', () => {
+    expect(isDraftProjectPath('projects/drafts/remote-desktop.en.md')).toBe(true)
+    expect(isDraftProjectPath('projects/portfolio.en.md')).toBe(false)
   })
 
   it('renders Markdown projects on the homepage', async () => {

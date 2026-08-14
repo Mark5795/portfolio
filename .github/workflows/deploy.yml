@@ -45,20 +45,20 @@ jobs:
           cache-to: type=gha,mode=max
 
   # STAP 2: Laat de Raspberry Pi alleen de kant-en-klare image pullen en herstarten
-  deploy:
-    needs: build
-    runs-on: self-hosted
-    environment: production
+  # deploy:
+  #   needs: build
+  #   runs-on: self-hosted
+  #   environment: production
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v5
 
-      - name: Pull nieuwste image & herstart container
-        env:
-          PORTFOLIO_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-        run: |
-          docker compose pull
-          docker compose up -d --no-build --remove-orphans
+  #     - name: Pull nieuwste image & herstart container
+  #       env:
+  #         PORTFOLIO_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+  #         TURNSTILE_SECRET: ${{ secrets.TURNSTILE_SECRET }}
+  #         ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+  #       run: |
+  #         docker compose pull
+  #         docker compose up -d --no-build --remove-orphans

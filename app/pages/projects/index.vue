@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { compareProjectsByPublishedDate, isArchivedProjectPath, parseProjectMarkdown, projectLocaleFromPath, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
+import { compareProjectsByPublishedDate, isArchivedProjectPath, isDraftProjectPath, parseProjectMarkdown, projectLocaleFromPath, projectMatchesLocale, projectSlugFromPath } from '~/utils/project-content'
 
 const { locale, t } = useI18n()
 const sortOrder = ref('newest')
@@ -47,7 +47,7 @@ const projectFiles = import.meta.glob('../../../content/projects/**/*.md', {
 })
 
 const projects = computed(() => {
-  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path))
+  const paths = Object.keys(projectFiles).filter((path) => !isArchivedProjectPath(path) && !isDraftProjectPath(path))
   const slugs = [...new Set(paths.map(projectSlugFromPath))]
 
   const projects = slugs.map((slug) => {
