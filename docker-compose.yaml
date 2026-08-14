@@ -1,4 +1,20 @@
 services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: mark-portfolio-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - portfolio-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   portfolio:
     build:
       context: .
@@ -6,6 +22,9 @@ services:
     image: ${PORTFOLIO_IMAGE:-mark-portfolio:latest}
     container_name: mark-portfolio
     restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
       - "3000:3000"
     environment:
@@ -14,8 +33,11 @@ services:
       PORT: 3000
       TURNSTILE_SECRET: ${TURNSTILE_SECRET}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-    volumes:
-      - portfolio-data:/app/data
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: ${POSTGRES_DB}
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
 
 volumes:
-  portfolio-data:
+  portfolio-postgres-data:

@@ -2,7 +2,7 @@ import { createError, getRouterParam } from 'h3'
 import { isAdminSessionValid } from '../../../utils/admin-auth'
 import { approveComment } from '../../../utils/comments-db'
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   if (!isAdminSessionValid(event)) {
     throw createError({ statusCode: 401, statusMessage: 'Admin authentication required' })
   }
@@ -12,7 +12,7 @@ export default defineEventHandler((event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid comment id' })
   }
 
-  if (!approveComment(commentId)) {
+  if (!await approveComment(commentId)) {
     throw createError({ statusCode: 404, statusMessage: 'Comment not found' })
   }
 

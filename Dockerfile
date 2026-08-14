@@ -1,4 +1,4 @@
-FROM node:22-trixie-slim AS build
+FROM node:22-trixie AS build
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN ./node_modules/.bin/nuxt build
 
-FROM node:22-trixie-slim AS runtime
+FROM node:22-trixie AS runtime
 
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
@@ -25,7 +25,6 @@ WORKDIR /app
 
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/content ./content
-RUN mkdir /app/data && chown node:node /app/data
 
 EXPOSE 3000
 

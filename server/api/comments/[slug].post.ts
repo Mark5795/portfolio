@@ -57,6 +57,6 @@ export default defineEventHandler(async (event) => {
   }
 
   return {
-    comment: createProjectComment(projectSlug, name, message),
+    comment: await createProjectComment(projectSlug, name, message),
   }
 })

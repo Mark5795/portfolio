@@ -1,6 +1,4 @@
-import Database from 'better-sqlite3'
-import { mkdirSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { Pool } from 'pg'
 
 export type ProjectComment = {
   id: number
@@ -11,69 +9,73 @@ export type ProjectComment = {
   approved: boolean
 }
 
-const databasePath = process.env.COMMENTS_DB_PATH || join(process.cwd(), 'data', 'comments.sqlite')
-mkdirSync(dirname(databasePath), { recursive: true })
+const database = new Pool({
+  host: process.env.PGHOST,
+  port: Number(process.env.PGPORT || 5432),
+  database: process.env.PGDATABASE,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+})
 
-const database = new Database(databasePath)
-database.pragma('journal_mode = WAL')
-database.exec(`
+const databaseReady = database.query(`
   CREATE TABLE IF NOT EXISTS comments (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     project_slug TEXT NOT NULL,
     name TEXT NOT NULL,
     message TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    approved BOOLEAN NOT NULL DEFAULT FALSE
   )
 `)
 
-let commentsTableWasMigrated = false
-try {
-  database.exec('ALTER TABLE comments ADD COLUMN approved INTEGER NOT NULL DEFAULT 0')
-  commentsTableWasMigrated = true
-} catch (error) {
-  if (!(error instanceof Error) || !error.message.includes('duplicate column name')) throw error
+const commentFields = `
+  SELECT comments.id, comments.project_slug AS "projectSlug", comments.name,
+    comments.message, comments.created_at AS "createdAt", comments.approved
+  FROM comments
+`
+
+export const listProjectComments = async (projectSlug: string): Promise<ProjectComment[]> => {
+  await databaseReady
+  const result = await database.query<ProjectComment>(`${commentFields}
+  WHERE comments.project_slug = $1 AND comments.approved = TRUE
+  ORDER BY comments.id DESC`, [projectSlug])
+  return result.rows
 }
 
-if (commentsTableWasMigrated) database.exec('UPDATE comments SET approved = 1')
+export const listAllComments = async (): Promise<ProjectComment[]> => {
+  await databaseReady
+  const result = await database.query<ProjectComment>(`${commentFields}
+  ORDER BY comments.id DESC`)
+  return result.rows
+}
 
-const listCommentsStatement = database.prepare(`
-  SELECT id, project_slug AS projectSlug, name, message, created_at AS createdAt, approved = 1 AS approved
-  FROM comments
-  WHERE project_slug = ? AND approved = 1
-  ORDER BY id DESC
-`)
+export const deleteComment = async (commentId: number): Promise<boolean> => {
+  await databaseReady
+  const result = await database.query('DELETE FROM comments WHERE id = $1', [commentId])
+  return result.rowCount === 1
+}
 
-const listAllCommentsStatement = database.prepare(`
-  SELECT id, project_slug AS projectSlug, name, message, created_at AS createdAt, approved = 1 AS approved
-  FROM comments
-  ORDER BY id DESC
-`)
+export const approveComment = async (commentId: number): Promise<boolean> => {
+  await databaseReady
+  const result = await database.query(
+    'UPDATE comments SET approved = TRUE WHERE id = $1',
+    [commentId],
+  )
+  return result.rowCount === 1
+}
 
-const createCommentStatement = database.prepare(`
-  INSERT INTO comments (project_slug, name, message, approved)
-  VALUES (?, ?, ?, 0)
-`)
-
-const deleteCommentStatement = database.prepare('DELETE FROM comments WHERE id = ?')
-const approveCommentStatement = database.prepare('UPDATE comments SET approved = 1 WHERE id = ?')
-
-export const listProjectComments = (projectSlug: string): ProjectComment[] =>
-  listCommentsStatement.all(projectSlug) as ProjectComment[]
-
-export const listAllComments = (): ProjectComment[] =>
-  listAllCommentsStatement.all() as ProjectComment[]
-
-export const deleteComment = (commentId: number) =>
-  deleteCommentStatement.run(commentId).changes > 0
-
-export const approveComment = (commentId: number) =>
-  approveCommentStatement.run(commentId).changes > 0
-
-export const createProjectComment = (projectSlug: string, name: string, message: string): ProjectComment => {
-  const result = createCommentStatement.run(projectSlug, name, message)
-  return database.prepare(`
-    SELECT id, project_slug AS projectSlug, name, message, created_at AS createdAt, approved = 1 AS approved
-    FROM comments
-    WHERE id = ?
-  `).get(result.lastInsertRowid) as ProjectComment
+export const createProjectComment = async (
+  projectSlug: string,
+  name: string,
+  message: string,
+): Promise<ProjectComment> => {
+  await databaseReady
+  const result = await database.query<ProjectComment>(`WITH inserted AS (
+    INSERT INTO comments (project_slug, name, message)
+    VALUES ($1, $2, $3)
+    RETURNING id
+  )
+  ${commentFields}
+  JOIN inserted ON inserted.id = comments.id`, [projectSlug, name, message])
+  return result.rows[0]
 }
