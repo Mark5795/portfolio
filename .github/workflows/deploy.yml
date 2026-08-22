@@ -46,10 +46,10 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # STAP 2: Deploy naar de K3s-cluster via de self-hosted runner
+  # STAP 2: Deploy naar de K3s-cluster via een self-hosted runner
   deploy:
     needs: build
-    runs-on: github-hosted-runner
+    runs-on: [self-hosted, linux, k3s]
     environment: production
     permissions:
       contents: read
