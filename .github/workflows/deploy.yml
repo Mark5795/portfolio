@@ -49,7 +49,7 @@ jobs:
   # STAP 2: Deploy naar de K3s-cluster via de self-hosted runner
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: github-hosted-runner
     environment: production
     permissions:
       contents: read
