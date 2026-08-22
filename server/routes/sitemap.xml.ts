@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { getRequestURL, setHeader } from 'h3'
 import {
   isArchivedProjectPath,
+  isDraftProjectPath,
   parseProjectMarkdown,
   projectLocaleFromPath,
   projectSlugFromPath,

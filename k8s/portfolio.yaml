@@ -96,6 +96,8 @@ spec:
       labels:
         app: portfolio
     spec:
+      imagePullSecrets:
+        - name: ghcr-pull-secret
       initContainers:
         - name: wait-for-postgres
           image: postgres:17-alpine
