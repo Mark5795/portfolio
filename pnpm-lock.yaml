@@ -3093,8 +3093,8 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  devalue@5.9.0:
-    resolution: {integrity: sha512-RWrqdArjvPbsATEhOPUo6Wndc/iWnkWKlhIrdlF3zMMYo/c3CVtoaVAyLtWxz5h8nSlkHzxnzV2uLydPXmtF+A==}
+  devalue@5.9.2:
+    resolution: {integrity: sha512-po4PAY5c53tw5XMocSnf8A/5OHhbbUftpr93aEN6BBoAdntUmK7vu7wOATqvt7cXO7m1Cl4gMVn6p7n6n4mj0w==}
 
   devframe@0.8.0:
     resolution: {integrity: sha512-kUK/JIYlfb3A4nbIY+cJ/zljyfpCdBzwsR3uY2Y6Tbm6jnNY0w5yLpuDX524XQD7D1Vnmvs8kpC+ILOkCRk5OA==}
@@ -6904,7 +6904,7 @@ snapshots:
       '@nuxt/kit': 4.5.1(magic-string@0.30.21)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.1)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0)))
       consola: 3.4.2
       defu: 6.1.7
-      devalue: 5.9.0
+      devalue: 5.9.2
       h3: 1.15.11
       html-validate: 11.6.0(@vitest/expect@4.1.10)(vitest@4.1.10)
       knitwork: 1.3.0
@@ -7174,7 +7174,7 @@ snapshots:
       consola: 3.4.2
       defu: 6.1.7
       destr: 2.0.5
-      devalue: 5.9.0
+      devalue: 5.9.2
       errx: 0.1.2
       escape-string-regexp: 5.0.0
       exsolve: 1.1.1
@@ -7374,7 +7374,7 @@ snapshots:
       - vite
       - webpack
 
-  '@nuxt/vite-builder@4.5.2(27b5bb067d15876c4125d757c94f4f6d)':
+  '@nuxt/vite-builder@4.5.2(9ac89b31d5a9f2ae6483f1548eec779e)':
     dependencies:
       '@nuxt/kit': 4.5.2(magic-string@1.1.0)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.1)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0)))
       '@vitejs/plugin-vue': 6.0.8(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))
@@ -7402,6 +7402,7 @@ snapshots:
       std-env: 4.2.0
       ufo: 1.6.4
       unenv: 2.0.0-rc.24
+      unplugin: 3.3.0(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))
       vite: 8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0)
       vite-node: 6.0.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0)
       vite-plugin-checker: 0.14.5(eslint@10.8.0(jiti@2.7.0)(supports-color@10.2.2))(optionator@0.9.4)(typescript@6.0.3)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))
@@ -7413,8 +7414,11 @@ snapshots:
       rollup-plugin-visualizer: 7.0.1(rolldown@1.2.1)(rollup@4.62.4)
     transitivePeerDependencies:
       - '@biomejs/biome'
+      - '@farmfe/core'
+      - '@rspack/core'
       - '@types/node'
       - '@vitejs/devtools'
+      - bun-types-no-globals
       - esbuild
       - eslint
       - less
@@ -7424,6 +7428,7 @@ snapshots:
       - optionator
       - oxc-parser
       - oxlint
+      - rollup
       - sass
       - sass-embedded
       - stylelint
@@ -7433,8 +7438,9 @@ snapshots:
       - terser
       - tsx
       - typescript
-      - unplugin
+      - unloader
       - vue-tsc
+      - webpack
       - yaml
 
   '@nuxtjs/i18n@10.6.0(@vue/compiler-dom@3.5.40)(db0@0.3.4(better-sqlite3@13.0.2))(esbuild@0.28.1)(eslint@10.8.0(jiti@2.7.0)(supports-color@10.2.2))(ioredis@5.11.1(supports-color@10.2.2))(magicast@0.5.4)(rolldown@1.2.1)(rollup@4.62.4)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))':
@@ -7451,7 +7457,7 @@ snapshots:
       '@vue/compiler-sfc': 3.5.40
       confbox: 0.2.4
       defu: 6.1.7
-      devalue: 5.9.0
+      devalue: 5.9.2
       h3: 1.15.11
       knitwork: 1.3.0
       magic-string: 0.30.21
@@ -8906,7 +8912,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  devalue@5.9.0: {}
+  devalue@5.9.2: {}
 
   devframe@0.8.0(cac@7.0.0)(srvx@0.11.22):
     dependencies:
@@ -10202,7 +10208,7 @@ snapshots:
       '@nuxt/nitro-server': 4.5.2(717c14010c4c54f675be4f09c726643d)
       '@nuxt/schema': 4.5.2
       '@nuxt/telemetry': 2.8.0(@nuxt/kit@4.5.2(magic-string@1.1.0)(magicast@0.5.4)(oxc-parser@0.140.0)(rolldown@1.2.1)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))))
-      '@nuxt/vite-builder': 4.5.2(27b5bb067d15876c4125d757c94f4f6d)
+      '@nuxt/vite-builder': 4.5.2(9ac89b31d5a9f2ae6483f1548eec779e)
       '@unhead/vue': 3.3.1(@oxc-project/types@0.142.0)(esbuild@0.28.1)(lightningcss@1.33.0)(oxc-parser@0.140.0)(rolldown@1.2.1)(rollup@4.62.4)(vite@8.2.0(@types/node@26.1.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.0)(yaml@2.9.0))(vue@3.5.40(typescript@6.0.3))
       '@vue/shared': 3.5.40
       chokidar: 5.0.0
@@ -10210,7 +10216,7 @@ snapshots:
       consola: 3.4.2
       cookie-es: 3.1.1
       defu: 6.1.7
-      devalue: 5.9.0
+      devalue: 5.9.2
       errx: 0.1.2
       escape-string-regexp: 5.0.0
       exsolve: 1.1.1
